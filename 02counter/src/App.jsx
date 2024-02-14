@@ -8,15 +8,19 @@ function App() {
   // let counter = 5
 
   const addValue = () => {
-    counter += 1
-    setCounter(counter)
-    // console.log(counter);
+    if (counter < 60) {
+      counter += 1
+      setCounter(counter)
+      // console.log(counter);
+    }
   }
 
   const removeValue = () => {
-    counter -= 1
-    setCounter(counter)
-    // console.log(counter);
+    if (counter > 0) {
+      counter -= 1
+      setCounter(counter)
+      // console.log(counter);
+    }
   }
 
   return (
@@ -26,12 +30,13 @@ function App() {
 
       <button
         onClick={addValue}
-      >Add value</button>
+      >Add value {counter}</button>
       <br />
       <br />
       <button
         onClick={removeValue}
-      >Remove value</button>
+      >Remove value {counter}</button>
+      <h3>Footer: {counter}</h3>
     </>
   )
 }
