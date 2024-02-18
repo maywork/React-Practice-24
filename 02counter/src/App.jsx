@@ -9,9 +9,17 @@ function App() {
 
   const addValue = () => {
     if (counter < 60) {
-      counter += 1
-      setCounter(counter)
-      // console.log(counter);
+      // counter += 1
+      setCounter((prevCounter) => prevCounter + 1) // prevCounter -> last updated state
+      setCounter((prevCounter) => prevCounter + 1)
+      setCounter((prevCounter) => prevCounter + 1)
+      setCounter((prevCounter) => prevCounter + 1)
+
+      // setCounter(counter + 1) // updates as a batch
+      // setCounter(counter + 1) // updates as a batch
+      // setCounter(counter + 1) // updates as a batch
+      // setCounter(counter + 1) // updates as a batch
+      // // console.log(counter);
     }
   }
 
