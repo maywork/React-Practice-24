@@ -27,7 +27,7 @@ function App() {
     <>
 
       <h1 className='text-4xl text-center text-white my-3'>Password generator</h1>
-      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-orange-500 bg-gray-700'>
+      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-white bg-gray-700'>
         <div className='flex shadow rounded-lg overflow-hidden my-4'>
           <input
             type="text"
@@ -38,7 +38,7 @@ function App() {
           />
           <button className='outline-none bg-blue-600 text-white px-3 py-0.5 shrink-0'>copy</button>
         </div>
-        <div className='flex text-sm gap-x-1'>
+        <div className='flex text-sm gap-x-3'>
           <input type="range"
             min={6}
             max={100}
@@ -47,7 +47,33 @@ function App() {
             onChange={(e) => { setLength(e.target.value) }}
           />
           <label>Length: {length}</label>
+          <div className="flex items-center gap-x-1">
+            <input type="checkbox"
+              defaultChecked={numberAllowed}
+              id='numberInput'
+              onChange={() => {
+                setNumberAllowed((prev) => !prev);
+              }}
+            />
+            <label htmlFor="numberInput">Numbers</label>
+
+
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input type="checkbox"
+              defaultChecked={charAllowed}
+              id='charInput'
+              onChange={() => {
+                setCharAllowed((prev) => !prev);
+              }}
+            />
+            <label htmlFor="charInput">Characters</label>
+          </div>
         </div>
+
+
+
+
       </div>
     </>
   )
