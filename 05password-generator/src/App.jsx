@@ -1,10 +1,13 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 function App() {
   const [length, setLength] = useState(8)
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false)
   const [password, setPassword] = useState('')
+
+  // useRef hook
+  const passwordRef = useRef(null) // to elevate ux
 
   const passwordGenerator = useCallback(() => {
     let pass = ''
@@ -23,6 +26,13 @@ function App() {
 
   }, [length, numberAllowed, charAllowed, setPassword])
 
+  const copyPasstoClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    // passwordRef.current?.setSelectionRange(0, 3); // good to know
+    passwordRef.current?.setSelectionRange(0, 12); // set max 12 value
+    window.navigator.clipboard.writeText(password)
+  }, [password])
+
   useEffect(() => {
     passwordGenerator()
   }, [length, numberAllowed, charAllowed, passwordGenerator])
@@ -39,8 +49,11 @@ function App() {
             className='outline-none w-full py-1 px-3'
             placeholder='password'
             readOnly
+            ref={passwordRef}
           />
-          <button className='outline-none bg-blue-600 text-white px-3 py-0.5 shrink-0'>copy</button>
+          <button
+            onClick={copyPasstoClipboard}
+            className='outline-none bg-blue-600 text-white px-3 py-0.5 shrink-0'>copy</button>
         </div>
         <div className='flex text-sm gap-x-3'>
           <input type="range"
@@ -74,9 +87,6 @@ function App() {
             <label htmlFor="charInput">Characters</label>
           </div>
         </div>
-
-
-
 
       </div>
     </>
